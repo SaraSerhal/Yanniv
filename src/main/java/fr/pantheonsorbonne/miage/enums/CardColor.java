@@ -4,10 +4,10 @@ package fr.pantheonsorbonne.miage.enums;
  * List the possible colors of a card
  */
 public enum CardColor {
-    SPADE(127137),
+    SPADE(127137), // pique
     HEART(127137 + 16),
     DIAMOND(127137 + 16 * 2),
-    CLUB(127137 + 16 * 3);
+    CLUB(127137 + 16 * 3); //trefle
 
     private final int code;
 
