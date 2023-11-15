@@ -1,9 +1,10 @@
 package fr.pantheonsorbonne.miage.engine;
 
+import fr.pantheonsorbonne.miage.card.Card;
+import fr.pantheonsorbonne.miage.card.DeterministDeck;
 import fr.pantheonsorbonne.miage.engine.local.LocalWarGame;
 import fr.pantheonsorbonne.miage.exception.NoMoreCardException;
-import fr.pantheonsorbonne.miage.game.Card;
-import fr.pantheonsorbonne.miage.game.DeterministDeck;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WarGameEngineTest {
 
-    WarGameEngine engine;
+    GameEngine engine;
     Queue<String> players;
 
 
@@ -101,17 +102,17 @@ class WarGameEngineTest {
 
     @Test
     void getWinnerWinJ2() {
-        assertEquals("Joueur2", WarGameEngine.getWinner("Joueur1", "Joueur2", Card.valueOf("2H"), Card.valueOf("3H")));
+        assertEquals("Joueur2", GameEngine.getWinner("Joueur1", "Joueur2", Card.valueOf("2H"), Card.valueOf("3H")));
     }
 
     @Test
     void getWinnerWinJ1() {
-        assertEquals("Joueur1", WarGameEngine.getWinner("Joueur1", "Joueur2", Card.valueOf("3H"), Card.valueOf("2H")));
+        assertEquals("Joueur1", GameEngine.getWinner("Joueur1", "Joueur2", Card.valueOf("3H"), Card.valueOf("2H")));
     }
 
     @Test
     void getWinnerTie() {
-        assertEquals(null, WarGameEngine.getWinner("Joueur1", "Joueur2", Card.valueOf("3H"), Card.valueOf("3S")));
+        assertEquals(null, GameEngine.getWinner("Joueur1", "Joueur2", Card.valueOf("3H"), Card.valueOf("3S")));
     }
 
 

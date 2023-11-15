@@ -1,5 +1,7 @@
 package fr.pantheonsorbonne.miage.game;
 
+import fr.pantheonsorbonne.miage.card.Card;
+
 public class DeterministDeckTest extends DeckTest {
 
 

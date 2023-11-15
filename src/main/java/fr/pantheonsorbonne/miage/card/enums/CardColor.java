@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.miage.enums;
+package fr.pantheonsorbonne.miage.card.enums;
 
 /**
  * List the possible colors of a card

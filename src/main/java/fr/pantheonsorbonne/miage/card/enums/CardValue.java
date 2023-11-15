@@ -1,4 +1,4 @@
-package fr.pantheonsorbonne.miage.enums;
+package fr.pantheonsorbonne.miage.card.enums;
 
 /**
  * An enum that represend the possible cards value from a deck

@@ -1,13 +1,13 @@
-package fr.pantheonsorbonne.miage.game;
-
-import fr.pantheonsorbonne.miage.enums.CardColor;
-import fr.pantheonsorbonne.miage.enums.CardValue;
+package fr.pantheonsorbonne.miage.card;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import fr.pantheonsorbonne.miage.card.enums.CardColor;
+import fr.pantheonsorbonne.miage.card.enums.CardValue;
 
 public class Card {
 

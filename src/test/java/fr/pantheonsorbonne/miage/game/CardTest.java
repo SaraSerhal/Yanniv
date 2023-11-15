@@ -1,7 +1,9 @@
 package fr.pantheonsorbonne.miage.game;
 
-import fr.pantheonsorbonne.miage.enums.CardColor;
-import fr.pantheonsorbonne.miage.enums.CardValue;
+import fr.pantheonsorbonne.miage.card.Card;
+import fr.pantheonsorbonne.miage.card.enums.CardColor;
+import fr.pantheonsorbonne.miage.card.enums.CardValue;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
