@@ -19,4 +19,5 @@ public class DeckPile extends Pile{
             pile.add(cards.get(i)); //ajoute les cartes mélangées à la pile deck
         }
     }
+
 }

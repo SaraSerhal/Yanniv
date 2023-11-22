@@ -7,20 +7,21 @@ import fr.pantheonsorbonne.miage.player.Player;
 public abstract class AlternateTurnGame extends GameImpl {
 
     private final Random random = new Random();
-    protected int numCurrentPlayer;
+    protected Player currentPlayer;
 
     public AlternateTurnGame(int nb) {
         super(nb);
-        numCurrentPlayer=-1;
+        currentPlayer = players.get(random.nextInt(nbPlayers));
     }
+
 
     @Override
     public Player getNextPlayer() {
-        if (numCurrentPlayer == -1) {
-            numCurrentPlayer=random.nextInt();
-        } else {
-            numCurrentPlayer= (numCurrentPlayer++)%players.length;
+        for(Player player:players){
+            if(player.sayYaniv()){
+                currentPlayer=player;
+            }
         }
-        return players[numCurrentPlayer];
+        return currentPlayer;
     }
 }

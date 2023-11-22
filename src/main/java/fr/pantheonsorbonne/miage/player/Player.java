@@ -1,17 +1,21 @@
 package fr.pantheonsorbonne.miage.player;
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.pantheonsorbonne.miage.card.Card;
 import fr.pantheonsorbonne.miage.card.DeckPile;
 import fr.pantheonsorbonne.miage.card.DiscardPile;
 
 public abstract class Player {
 
-    private String name;
-    //private List<Card> hand;
+    protected String name;
+    protected List<Card> hand;
     private int points;
 
     public Player(String name) {
         this.name = name;
         this.points=0;
-        //this.hand= new LinkedList<Card>();
+        this.hand= new ArrayList<Card>();
     }
 
     public abstract void play(DiscardPile discardPile, DeckPile deckPile);
@@ -28,7 +32,19 @@ public abstract class Player {
         return points;
     }
 
-    public boolean isWinnerRound() {
-        //TODO
+    public abstract boolean sayYaniv() ;
+
+    public void pickDeckPile(DeckPile deckPile, List<Card> hand){
+        hand.add(deckPile.pop());
     }
+
+    public void pickDiscardPile(DiscardPile discardPile,List<Card> hand){
+        hand.add(discardPile.pop());
+    }
+
+    public abstract void discardCards(DiscardPile discardPile);
+
+    public abstract List<Card> chooseDiscardCards();
+
+    //
 }
