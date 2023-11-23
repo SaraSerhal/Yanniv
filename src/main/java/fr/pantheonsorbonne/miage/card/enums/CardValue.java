@@ -4,7 +4,7 @@ package fr.pantheonsorbonne.miage.card.enums;
  * An enum that represend the possible cards value from a deck
  */
 public enum CardValue {
-    ACE("1", 14),
+    ACE("1", 1),
     TWO("2", 2),
     THREE("3", 3),
     FOUR("4", 4),

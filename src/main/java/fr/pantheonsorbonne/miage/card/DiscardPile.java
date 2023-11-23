@@ -16,5 +16,4 @@ public class DiscardPile extends Pile{
         pile.addAll(cards); //Les cartes sont ajoutées à la discardpile dans l'ordre.
     }
 
-
 }

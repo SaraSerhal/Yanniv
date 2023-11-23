@@ -18,14 +18,27 @@ public class DumbPlayer extends Player {
 
     @Override
     public void play(DiscardPile discardPile, DeckPile deckPile) {
-        boolean randomBoolean = this.random.nextBoolean();
+        if(points<=7){
+            playerStatus=PlayerStatus.YANIV;
+            System.out.println(name+" déclare 'Yaniv'. ");
+            return;
+        }
+        boolean randomBoolean = this.random.nextBoolean(); // renvoie true si il veut piocher et false si il veut pendre une carte défaussée
         if (randomBoolean) {
             System.out.println(name + " décide de piocher");
+            if(deckPile.isEmpty()){
+                List<Card> deckCard= new ArrayList<Card>();
+                deckCard.add(discardPile.getFirst());
+                discardPile.getPile().removeAll(deckCard);
+                deckPile.setPile(discardPile.getPile());
+                discardPile.setPile(deckCard);
+            }
             pickDeckPile(deckPile, hand);
         } else {
             System.out.println(name + " décide de prendre la carte de la pile  de défausse");
             pickDiscardPile(discardPile, hand);
         }
+        //pose une carte random qui est supprimé de hand
         discardCards(discardPile);
     }
 
@@ -50,12 +63,5 @@ public class DumbPlayer extends Player {
         }
         return discardedCards;
     }
-
-    @Override
-    public boolean sayYaniv() {
-
-    }
-
-    
 
 }

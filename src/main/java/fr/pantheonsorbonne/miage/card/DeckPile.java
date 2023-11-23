@@ -9,7 +9,7 @@ public class DeckPile extends Pile{
         super();
     }
 
-    public void RandomDeck(List<Card> cards) {  //créer un deck à partir d'une pile de cartes cards, les cartes du deck sont face cachée
+    public List<Card> RandomDeck(List<Card> cards) {  //créer un deck à partir d'une pile de cartes cards, les cartes du deck sont face cachée
         if(cards.isEmpty()){ //si la pile cards est vide
             cards = Card.getAllPossibleCards(); //génère toutes les cartes possibles dans la pile
         }
@@ -18,6 +18,7 @@ public class DeckPile extends Pile{
         for (int i = 0; i < cards.size(); i++) {
             pile.add(cards.get(i)); //ajoute les cartes mélangées à la pile deck
         }
+        return cards;
     }
 
 }
