@@ -1,6 +1,7 @@
 package fr.pantheonsorbonne.miage.card;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class Pile {
@@ -11,12 +12,7 @@ public abstract class Pile {
     }
 
     public List<Card> getCard(int nb) { //Cette méthode retourne un nombre nb cartes à partir de la pile
-        List<Card> res = LinkedList<Card>();
-        for(int i=0;i<nb;i++){
-            res.add((ArrayList<Card>) pile).remove(pile.size()); //retire et renvoie le premier element de pile
-        }
-
-        return res;  //tableau de cartes de longueur nb.
+      return Collections.EMPTY_LIST;
     }
 
     /**
