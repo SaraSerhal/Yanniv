@@ -1,13 +1,19 @@
 package fr.pantheonsorbonne.miage.engine;
 
-import fr.pantheonsorbonne.miage.card.DeckPile;
-import fr.pantheonsorbonne.miage.card.DiscardPile;
 import fr.pantheonsorbonne.miage.player.Player;
 
 public interface Game {
 
     Player getNextPlayer();
 
-    void start(DiscardPile discardPile, DeckPile deckPile);
+    void goNextRound();
+
+    void nextPlayerTurn();
+
+    void start();
+
+    void endOfRound();
+
+    void endOfGame();
 
 }

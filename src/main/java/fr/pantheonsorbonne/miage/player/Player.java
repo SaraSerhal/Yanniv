@@ -45,16 +45,17 @@ public abstract class Player {
         playerStatus = pstatus;
     }
 
-    public void setHand(List<Card> cards){
-        hand= cards;
+    public void setHand(List<Card> cards) {
+        hand = cards;
     }
 
     public void pickDeckPile(DeckPile deckPile, List<Card> hand) {
-        hand.add(deckPile.pop());
+        hand.add(deckPile.getFirst());
+        deckPile.remove(hand);
     }
 
     public void pickDiscardPile(DiscardPile discardPile, List<Card> hand) {
-        hand.add(discardPile.pop());
+        hand.add(discardPile.getFirst());
     }
 
     public abstract void discardCards(DiscardPile discardPile);
@@ -77,17 +78,22 @@ public abstract class Player {
         return sum;
     }
 
-    public void updateStatus(Player playerSayYaniv) {
+    public boolean isLoser() {
+        if (points >= 100) {
+            playerStatus = PlayerStatus.LOSER;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasAssafDeclaration(final Player playerSayYaniv) {
         if (sumPoints(hand) <= playerSayYaniv.sumPoints(playerSayYaniv.getHand())
                 && playerStatus != PlayerStatus.YANIV) {
-            playerStatus = PlayerStatus.ASSAF;
             System.out.println(getName() + " déclare 'Assaf'. " + playerSayYaniv.getName()
                     + " est pénalisé et récupère 30 points.");
-            playerSayYaniv.addPoints(30);
+            return true;
         }
-        if (points >= 100) {
-            System.out.println("Le joueur " + getName() + " a perdu et est éliminé.");
-            playerStatus = PlayerStatus.LOSER;
-        }
+        return false;
+
     }
 }
