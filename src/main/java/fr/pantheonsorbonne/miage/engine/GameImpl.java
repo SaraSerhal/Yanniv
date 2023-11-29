@@ -1,5 +1,4 @@
 package fr.pantheonsorbonne.miage.engine;
-//sarah c'est la plus belle et  elle est trop incr'
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,7 +7,6 @@ import fr.pantheonsorbonne.miage.card.Card;
 import fr.pantheonsorbonne.miage.card.DeckPile;
 import fr.pantheonsorbonne.miage.card.DiscardPile;
 import fr.pantheonsorbonne.miage.player.Player;
-import fr.pantheonsorbonne.miage.player.PlayerStatus;
 
 public abstract class GameImpl implements Game {
 
@@ -17,6 +15,8 @@ public abstract class GameImpl implements Game {
     protected int nbPlayers;
     protected GameStatus gameStatus;
     protected int numRound;
+    protected DeckPile deckPile;
+    protected DiscardPile discardPile;
 
     public GameImpl(int nb,List<Player> players) {
         // pour les test, verifier que le nombre de joueur est minimum 1;
@@ -25,10 +25,12 @@ public abstract class GameImpl implements Game {
         nbPlayers = nb;
         gameStatus = GameStatus.ONGOING;
         numRound = 1;
+        deckPile= new DeckPile();
+        discardPile = new DiscardPile();
 
     }
 
-    public void giveCardsToPlayer(List<Player> players,DeckPile deckPile) {
+    public void giveCardsToPlayer() {
         for(Player player: players){
             List<Card> cards=deckPile.takeCards(7);
             player.setHand(cards);
@@ -36,12 +38,17 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void start(DiscardPile discardPile, DeckPile deckPile) {
+    public void start() {
         System.out.println("La partie commence: ");
         System.out.println("Joueurs: ");
         for(Player player: players){
             System.out.print(player.getName()+"-");
         }
-        goNextRound(discardPile,deckPile);
+        goNextRound();
+    }
+
+    public void installation(){
+        deckPile.RandomDeck() ;
+        giveCardsToPlayer();
     }
 }

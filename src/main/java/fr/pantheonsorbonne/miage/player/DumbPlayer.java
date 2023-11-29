@@ -45,12 +45,12 @@ public class DumbPlayer extends Player {
     }
 
     @Override
-    public void discardCards(DiscardPile discardPile) {
+    public void discardCards(DiscardPile discardPile) { //defausse
         discardPile.add(chooseDiscardCards());
     }
 
     @Override
-    public List<Card> chooseDiscardCards() {
+    public List<Card> chooseDiscardCards() { //choisi cartes a defausser
         List<Card> discardedCards= new ArrayList<>();
         Card card = discardedCards.get(random.nextInt(hand.size())); //choisir une carte au hasard a défausser
         discardedCards.add(card);
