@@ -14,20 +14,20 @@ public class DumbPlayer extends Player {
 
     Random random = new Random();
 
-    public DumbPlayer(String name) {
-        super(name);
+    public DumbPlayer(int numero) {
+        super(numero);
     }
 
     @Override
     public void play(DiscardPile discardPile, DeckPile deckPile) {
         if(points<=7){
             playerStatus=PlayerStatus.YANIV;
-            System.out.println(name+" déclare 'Yaniv'. ");
+            System.out.println("Joueur "+numero+" déclare 'Yaniv'. ");
             return;
         }
         boolean wantDeck = this.random.nextBoolean(); // renvoie true si il veut piocher et false si il veut pendre une carte défaussée
         if (wantDeck) {
-            System.out.println(name + " décide de piocher");
+            System.out.println("Joueur "+numero+ " décide de piocher");
             if(deckPile.isEmpty()){
                 Deque<Card> deckCard= new ArrayDeque<Card>();
                 deckCard.add(discardPile.getFirst());
@@ -37,7 +37,7 @@ public class DumbPlayer extends Player {
             }
             pickDeckPile(deckPile, hand);
         } else {
-            System.out.println(name + " décide de prendre la carte de la pile  de défausse");
+            System.out.println("Joueur "+numero+ " décide de prendre la carte de la pile  de défausse");
             pickDiscardPile(discardPile, hand);
         }
         discardPile.add(chooseDiscardCards());

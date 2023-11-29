@@ -8,15 +8,14 @@ import fr.pantheonsorbonne.miage.card.DeckPile;
 import fr.pantheonsorbonne.miage.card.DiscardPile;
 
 public abstract class Player {
-
-    protected String name;
+    protected int numero;
     protected List<Card> hand;
     protected int points;
     protected Boolean sayYaniv;
     protected PlayerStatus playerStatus;
 
-    public Player(String name) {
-        this.name = name;
+    public Player(int numero) {
+        this.numero=numero;
         this.points = 0;
         this.hand = new LinkedList<Card>();
         sayYaniv = false;
@@ -25,8 +24,8 @@ public abstract class Player {
 
     public abstract void play(DiscardPile discardPile, DeckPile deckPile);
 
-    public String getName() {
-        return this.name;
+    public int getNumero() {
+        return this.numero;
     }
 
     public List<Card> getHand() {
@@ -49,9 +48,8 @@ public abstract class Player {
         hand = cards;
     }
 
-    public void pickDeckPile(DeckPile deckPile, List<Card> hand) {
+    public void pickDeckPile(DeckPile deckPile, List<Card> hand) { //pioche 1 carte
         hand.add(deckPile.getFirst());
-        deckPile.remove(hand);
     }
 
     public void pickDiscardPile(DiscardPile discardPile, List<Card> hand) {
@@ -89,7 +87,7 @@ public abstract class Player {
     public boolean hasAssafDeclaration(final Player playerSayYaniv) {
         if (sumPoints(hand) <= playerSayYaniv.sumPoints(playerSayYaniv.getHand())
                 && playerStatus != PlayerStatus.YANIV) {
-            System.out.println(getName() + " déclare 'Assaf'. " + playerSayYaniv.getName()
+            System.out.println("Le joueur "+getNumero() + " déclare 'Assaf'. Le joueur "+playerSayYaniv.getNumero()
                     + " est pénalisé et récupère 30 points.");
             return true;
         }

@@ -6,14 +6,22 @@ public interface Game {
 
     Player getNextPlayer();
 
-    void goNextRound();
+    void nextPlayerTurns();
 
-    void nextPlayerTurn();
+    void goNextRound();
 
     void start();
 
     void endOfRound();
 
     void endOfGame();
+
+    void removeLosers();
+
+    void giveCardsToPlayer();
+
+    void installation();
+
+    void initializePlayers();
 
 }

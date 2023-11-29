@@ -10,7 +10,7 @@ public class DeckPile extends Pile {
         super();
     }
 
-    public void RandomDeck() { // mélange les cartes de la pioche, les cartes du deck sont face cachée
+    public void randomDeck() { // mélange les cartes de la pioche, les cartes du deck sont face cachée
         List<Card> cards = new ArrayList<>();
         if (cards.isEmpty()) { // si la pile cards est vide
             cards = Card.getAllPossibleCards(); // génère toutes les cartes possibles dans la pile
@@ -24,9 +24,6 @@ public class DeckPile extends Pile {
         for (Card card : cards) {
             pile.add(card); // Ajoute les cartes mélangées à l'ArrayDeque deck
         }
-    }
-
-    public void remove(List<Card> hand) {
     }
 
 }
