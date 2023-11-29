@@ -1,10 +1,5 @@
 package fr.pantheonsorbonne.miage.engine.local;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-//import java.util.Arrays;
-=======
->>>>>>> d9ea15af58b5e2d1cd203a8dd37243b85e70eed2
 import java.util.LinkedList;
 import java.util.List;
 import fr.pantheonsorbonne.miage.engine.AlternateTurnGame;
