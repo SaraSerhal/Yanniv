@@ -1,6 +1,8 @@
 package fr.pantheonsorbonne.miage.player;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 import java.util.Random;
 
@@ -23,11 +25,11 @@ public class DumbPlayer extends Player {
             System.out.println(name+" déclare 'Yaniv'. ");
             return;
         }
-        boolean randomBoolean = this.random.nextBoolean(); // renvoie true si il veut piocher et false si il veut pendre une carte défaussée
-        if (randomBoolean) {
+        boolean wantDeck = this.random.nextBoolean(); // renvoie true si il veut piocher et false si il veut pendre une carte défaussée
+        if (wantDeck) {
             System.out.println(name + " décide de piocher");
             if(deckPile.isEmpty()){
-                List<Card> deckCard= new ArrayList<Card>();
+                Deque<Card> deckCard= new ArrayDeque<Card>();
                 deckCard.add(discardPile.getFirst());
                 discardPile.getPile().removeAll(deckCard);
                 deckPile.setPile(discardPile.getPile());
@@ -38,7 +40,7 @@ public class DumbPlayer extends Player {
             System.out.println(name + " décide de prendre la carte de la pile  de défausse");
             pickDiscardPile(discardPile, hand);
         }
-        //pose une carte random qui est supprimé de hand
+        discardPile.add(chooseDiscardCards());
         discardCards(discardPile);
     }
 
@@ -49,18 +51,17 @@ public class DumbPlayer extends Player {
 
     @Override
     public List<Card> chooseDiscardCards() {
-        System.out.println("Carte(s) défaussée(s): ");
         List<Card> discardedCards= new ArrayList<>();
-        int indexRandom = random.nextInt(hand.size());
-        Card card = discardedCards.get(indexRandom);
+        Card card = discardedCards.get(random.nextInt(hand.size())); //choisir une carte au hasard a défausser
         discardedCards.add(card);
-        System.out.print(card.toString());
-        for(Card cardHand: hand){
+        System.out.print("Carte(s) défaussée(s): " +card.toString());
+        for(Card cardHand: hand){ //verifier si ya un double ou un triple
             if(cardHand.equals(card)){
                 discardedCards.add(cardHand);
                 System.out.print(card.toString());
             }
         }
+        hand.removeAll(discardedCards);
         return discardedCards;
     }
 

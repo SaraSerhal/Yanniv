@@ -50,11 +50,12 @@ public abstract class Player {
     }
 
     public void pickDeckPile(DeckPile deckPile, List<Card> hand) {
-        hand.add(deckPile.pop());
+        hand.add(deckPile.getFirst());
+        deckPile.remove(hand);
     }
 
     public void pickDiscardPile(DiscardPile discardPile, List<Card> hand) {
-        hand.add(discardPile.pop());
+        hand.add(discardPile.getFirst());
     }
 
     public abstract void discardCards(DiscardPile discardPile);
@@ -77,17 +78,22 @@ public abstract class Player {
         return sum;
     }
 
-    public void updateStatus(Player playerSayYaniv) {
-        if (sumPoints(hand) <= playerSayYaniv.sumPoints(playerSayYaniv.getHand())
-                && playerStatus != PlayerStatus.YANIV) {
-            playerStatus = PlayerStatus.ASSAF;
-            System.out.println(getName() + " déclare 'Assaf'. " + playerSayYaniv.getName()
-                    + " est pénalisé et récupère 30 points.");
-            playerSayYaniv.addPoints(30);
-        }
+    public void findLosers(Player playerSayYaniv) {
         if (points >= 100) {
             System.out.println("Le joueur " + getName() + " a perdu et est éliminé.");
             playerStatus = PlayerStatus.LOSER;
         }
+    }
+
+    public boolean assafDeclaration(Player playerSayYaniv){
+        if (sumPoints(hand) <= playerSayYaniv.sumPoints(playerSayYaniv.getHand())
+            && playerStatus != PlayerStatus.YANIV) {
+            System.out.println(getName() + " déclare 'Assaf'. " + playerSayYaniv.getName()
+                + " est pénalisé et récupère 30 points.");
+            playerSayYaniv.addPoints(30);
+            System.out.println(playerSayYaniv.getName() + " : " + playerSayYaniv.getPoints());
+            return true;
+        }
+        return false;
     }
 }

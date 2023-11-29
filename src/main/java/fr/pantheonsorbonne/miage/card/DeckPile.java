@@ -21,4 +21,7 @@ public class DeckPile extends Pile{
         return cards;
     }
 
+    public void remove(List<Card> hand) {
+    }
+
 }
