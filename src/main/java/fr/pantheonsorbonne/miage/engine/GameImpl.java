@@ -1,5 +1,9 @@
 package fr.pantheonsorbonne.miage.engine;
 
+<<<<<<< HEAD
+//import java.util.Arrays;
+=======
+>>>>>>> d9ea15af58b5e2d1cd203a8dd37243b85e70eed2
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
