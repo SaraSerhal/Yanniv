@@ -17,13 +17,15 @@ public class DumbPlayerTest{
 
     DumbPlayerTest engine;
     DumbPlayer player;
+    
+    
 
     @Test
-    public void testGetName() {
+    public void testgetName(){
         DumbPlayer player = new DumbPlayer("Sara");
         assertEquals("Sara", player.getName());
-    }
 
+    } 
    @Test
     public void testSetPlayerStatus(){
         DumbPlayer player = new DumbPlayer("Sara");
@@ -31,10 +33,12 @@ public class DumbPlayerTest{
         assertEquals("NORMAL", player.getPlayerStatus().name());
     }
 
-   /* @Test
-    public void getPoints(){
-
-    } */ 
+    /*  @Test
+    public void testgetPlayerStatus(){
+        DumbPlayer player = new DumbPlayer("Sara");
+        player.setPlayerStatus(PlayerStatus.LOSER);
+        assertEquals("LOSER", player.getPlayerStatus());
+    } */
 
 
     

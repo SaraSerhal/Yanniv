@@ -49,11 +49,11 @@ public abstract class Player {
     }
 
     public void pickDeckPile(DeckPile deckPile, List<Card> hand) { //pioche 1 carte
-        hand.add(deckPile.getFirst());
+        hand.add(deckPile.takeFist());
     }
 
     public void pickDiscardPile(DiscardPile discardPile, List<Card> hand) {
-        hand.add(discardPile.getFirst());
+        hand.add(discardPile.takeFist());
     }
 
     public abstract void discardCards(DiscardPile discardPile);

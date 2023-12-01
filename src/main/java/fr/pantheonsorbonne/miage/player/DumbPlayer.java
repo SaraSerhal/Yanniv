@@ -26,15 +26,8 @@ public class DumbPlayer extends Player {
             return;
         }
         boolean wantDeck = this.random.nextBoolean(); // renvoie true si il veut piocher et false si il veut pendre une carte défaussée
-        if (wantDeck) {
+        if (wantDeck||discardPile.isEmpty()) {
             System.out.println("Joueur "+numero+ " décide de piocher");
-            if(deckPile.isEmpty()){
-                Deque<Card> deckCard= new ArrayDeque<Card>();
-                deckCard.add(discardPile.getFirst());
-                discardPile.getPile().removeAll(deckCard);
-                deckPile.setPile(discardPile.getPile());
-                discardPile.setPile(deckCard);
-            }
             pickDeckPile(deckPile, hand);
         } else {
             System.out.println("Joueur "+numero+ " décide de prendre la carte de la pile  de défausse");

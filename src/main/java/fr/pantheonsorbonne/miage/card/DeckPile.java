@@ -11,19 +11,15 @@ public class DeckPile extends Pile {
     }
 
     public void randomDeck() { // mélange les cartes de la pioche, les cartes du deck sont face cachée
-        List<Card> cards = new ArrayList<>();
-        if (cards.isEmpty()) { // si la pile cards est vide
+        List<Card> cards ;
+        if (pile.isEmpty()) { // si la pile cards est vide
             cards = Card.getAllPossibleCards(); // génère toutes les cartes possibles dans la pile
+        }else{
+            cards = new ArrayList<>(pile); // Convertit la Deque en une liste temporaire
+            pile.clear();
         }
-        // puis, melange les cartes dans la pile cards
         Collections.shuffle(cards); // mélange l'ordre des cartes
-        for (int i = 0; i < cards.size(); i++) {
-            pile.add(cards.get(i)); // ajoute les cartes mélangées à la pile deck
-        }
+        pile.addAll(cards);
 
-        for (Card card : cards) {
-            pile.add(card); // Ajoute les cartes mélangées à l'ArrayDeque deck
-        }
     }
-
 }
