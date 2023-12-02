@@ -14,8 +14,7 @@ public abstract class AlternateTurnGame extends GameImpl {
         super();
     }
 
-    @Override
-    public Player getNextPlayer() {
+    public Player getFirstPlayer() {
         if (currentPlayer == null) {
             currentPlayer = players.get(random.nextInt(nbPlayers));
         } else {
@@ -29,13 +28,29 @@ public abstract class AlternateTurnGame extends GameImpl {
         return currentPlayer;
     }
 
+public Player getNextPlayer(){
+    return players.get((indPlayer(currentPlayer)+1)%players.size());
+}
+
+public int indPlayer(Player p){
+    int i=0;
+    for( Player player: players){
+        if(player.equals(p)){
+            return i;
+        }else{
+            i++;
+        }
+    }
+    return -1;
+}
+
     @Override
     public void goNextRound() {
         if (!hasNextRound) {
             return;
         }
-        System.out.println("\nManche " + numRound + " :\n");
-        currentPlayer = getNextPlayer();
+        System.out.println("\n_________\nManche " + numRound + " :\n");
+        currentPlayer = getFirstPlayer();
         nextPlayerTurns();
     }
 
@@ -48,7 +63,7 @@ public abstract class AlternateTurnGame extends GameImpl {
             }
             System.out.println("Tour du joueur " + currentPlayer.getNumero() + ":");
             if (!discardPile.isEmpty()) {
-                System.out.println("Première carte sur la pile de défausse: " + discardPile.getFirst().toFancyString());
+                System.out.println("Première carte sur la pile de défausse: " + discardPile.getFirst().toString());
             }
             currentPlayer.play(discardPile, deckPile);
             if (currentPlayer.getPlayerStatus() == PlayerStatus.YANIV) {
@@ -58,6 +73,8 @@ public abstract class AlternateTurnGame extends GameImpl {
                 endOfGame();
                 break;
             }
+            currentPlayer=getNextPlayer();
+            System.out.println();
         }
     }
 
@@ -75,12 +92,6 @@ public abstract class AlternateTurnGame extends GameImpl {
             }
         }
         System.out.println("Joueur " + currentPlayer.getNumero() + " : " + currentPlayer.getPoints());
-
-        for (Player player : players) {
-            if (player.isLoser()) {
-                System.out.println("Le joueur " + player.getNumero() + " a perdu et est éliminé.");
-            }
-        }
         removeLosers();
 
     }
@@ -96,7 +107,7 @@ public abstract class AlternateTurnGame extends GameImpl {
     @Override
     public void removeLosers() {
         for (Player player : players) {
-            if (player.getPlayerStatus() == PlayerStatus.LOSER) {
+            if (player.isLoser()) {
                 System.out.println("Le joueur " + player.getNumero() + " a perdu et est éliminé.");
                 players.remove(player);
                 nbPlayers--;

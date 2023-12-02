@@ -52,8 +52,8 @@ public abstract class Player {
         hand.add(deckPile.takeFist());
     }
 
-    public void pickDiscardPile(DiscardPile discardPile, List<Card> hand) {
-        hand.add(discardPile.takeFist());
+    public Card pickDiscardPile(DiscardPile discardPile) {
+        return (discardPile.takeFist());
     }
 
     public abstract void discardCards(DiscardPile discardPile);
@@ -71,7 +71,7 @@ public abstract class Player {
     public int sumPoints(List<Card> hand) {
         int sum = 0;
         for (Card card : hand) {
-            sum += card.getValue().getRank();
+            sum += card.getCardValue().getRank();
         }
         return sum;
     }
@@ -92,6 +92,13 @@ public abstract class Player {
             return true;
         }
         return false;
+    }
 
+    public int pointsHand(){
+        int nb=0;
+        for(Card card: hand){
+            nb+=card.getCardValue().getValue();
+        }
+        return nb;
     }
 }

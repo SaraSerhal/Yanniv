@@ -20,21 +20,24 @@ public class DumbPlayer extends Player {
 
     @Override
     public void play(DiscardPile discardPile, DeckPile deckPile) {
-        if(points<=7){
+        if(pointsHand()<=7){
             playerStatus=PlayerStatus.YANIV;
             System.out.println("Joueur "+numero+" déclare 'Yaniv'. ");
             return;
         }
         boolean wantDeck = this.random.nextBoolean(); // renvoie true si il veut piocher et false si il veut pendre une carte défaussée
+        Card cardDiscardPile=null;
         if (wantDeck||discardPile.isEmpty()) {
             System.out.println("Joueur "+numero+ " décide de piocher");
             pickDeckPile(deckPile, hand);
         } else {
             System.out.println("Joueur "+numero+ " décide de prendre la carte de la pile  de défausse");
-            pickDiscardPile(discardPile, hand);
+            cardDiscardPile= pickDiscardPile(discardPile);
         }
-        discardPile.add(chooseDiscardCards());
         discardCards(discardPile);
+        if(!(wantDeck||discardPile.isEmpty())){
+            hand.add(cardDiscardPile);
+        }
     }
 
     @Override
@@ -45,15 +48,16 @@ public class DumbPlayer extends Player {
     @Override
     public List<Card> chooseDiscardCards() { //choisi cartes a defausser
         List<Card> discardedCards= new ArrayList<>();
-        Card card = discardedCards.get(random.nextInt(hand.size())); //choisir une carte au hasard a défausser
+        Card card = hand.get(random.nextInt(hand.size())); //choisir une carte au hasard a défausser
         discardedCards.add(card);
-        System.out.print("Carte(s) défaussée(s): " +card.toString());
+        System.out.print("Carte(s) défaussée(s): " +card.toString()+" ");
         for(Card cardHand: hand){ //verifier si ya un double ou un triple
-            if(cardHand.equals(card)){
+            if(cardHand.getCardValue().getRank()==card.getCardValue().getRank()&&!(cardHand.equals(card))){
                 discardedCards.add(cardHand);
-                System.out.print(card.toString());
+                System.out.print(cardHand.toString()+" ");
             }
         }
+        System.out.println();
         hand.removeAll(discardedCards);
         return discardedCards;
     }

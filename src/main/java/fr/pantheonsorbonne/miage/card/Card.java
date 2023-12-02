@@ -29,7 +29,7 @@ public class Card {
      *
      * @return
      */
-    public CardValue getValue() {
+    public CardValue getCardValue() {
         return value;
     }
 
@@ -81,7 +81,7 @@ public class Card {
     }
 
     public String toFancyString() {  // Renvoie une représentation stylisée de la carte sous forme de chaîne de caractères
-        int rank = this.getValue().ordinal();
+        int rank = this.getCardValue().ordinal();
         if (rank > 10) {
             rank++;
         }
@@ -90,7 +90,7 @@ public class Card {
 
     @Override
     public int hashCode() {  // retourne un code de hachage basé sur la couleur et la valeur de la carte.
-        return Objects.hash(getColor(), getValue());
+        return Objects.hash(getColor(), getCardValue());
     }
 
     @Override
@@ -98,11 +98,11 @@ public class Card {
         if (this == o) return true;
         if (!(o instanceof Card)) return false;
         Card card = (Card) o;
-        return getColor() == card.getColor() && getValue() == card.getValue();
+        return getColor() == card.getColor() && getCardValue() == card.getCardValue();
     }
 
     @Override
     public String toString() { //Renvoie une représentation textuelle de la carte sous forme de chaîne de caractères, combinant la valeur et la couleur.
-        return this.getValue().getStringRepresentation() + this.getColor().getStringRepresentation();
+        return this.getCardValue().getStringRepresentation() + this.getColor().getStringRepresentation();
     }
 }
