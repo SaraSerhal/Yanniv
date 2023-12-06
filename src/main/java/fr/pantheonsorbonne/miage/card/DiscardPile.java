@@ -8,7 +8,6 @@ public class DiscardPile extends Pile{
         super();
     }
 
-
     public void add(List<Card> cards) { //prend un nombre variable d'arguments, représentant les cartes de la pile à défausse
         pile.addAll(cards); //Les cartes sont ajoutées à la discardpile dans l'ordre.
     }

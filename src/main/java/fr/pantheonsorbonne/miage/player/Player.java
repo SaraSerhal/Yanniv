@@ -60,7 +60,7 @@ public abstract class Player {
 
     public abstract List<Card> chooseDiscardCards();
 
-    public void addPoints(List<Card> hand) {
+    public void addPoint(List<Card> hand) {
         points += sumPoints(hand);
     }
 

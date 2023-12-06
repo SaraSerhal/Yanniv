@@ -84,7 +84,7 @@ public int indPlayer(Player p){
         System.out.println("Décompte des points:");
         for (Player player : players) {
             if (player != currentPlayer) {
-                player.addPoints(player.getHand());
+                player.addPoint(player.getHand());
                 System.out.println("Joueur " + player.getNumero() + " : " + player.getPoints());
                 if (player.hasAssafDeclaration(currentPlayer)) {
                     currentPlayer.addPoints(30);
