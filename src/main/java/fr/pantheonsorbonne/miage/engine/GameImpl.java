@@ -21,7 +21,6 @@ public abstract class GameImpl implements Game {
     protected DiscardPile discardPile;
     protected boolean hasNextRound;
 
-
     public GameImpl() {
         players = new LinkedList<Player>();
         nbPlayers = random.nextInt(4) + 2; // Génère un nombre aléatoire entre 0 et 3, puis on ajoute 2 pour obtenir un
@@ -44,23 +43,25 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void start() {
-        installation();
+        initializePlayers();
         System.out.println("Nous avons " + nbPlayers + " joueurs");
         System.out.println("La partie commence: ");
         while(hasNextRound){ // boucle qui s'arrete quand la partie est finie, chaque itération est une manche
+            installation();
             goNextRound();
         }
     }
 
     @Override
     public void installation() {
+        deckPile.clear();
         deckPile.randomDeck();
-        initializePlayers();
+        discardPile.clear();
         giveCardsToPlayer();
     }
 
     @Override
-    public void initializePlayers(){
+    public void initializePlayers(){ //changer  pour smartPlayer
         for(int i=0;i<nbPlayers;i++){
             Player player= new DumbPlayer(i+1);
             players.add(player);
