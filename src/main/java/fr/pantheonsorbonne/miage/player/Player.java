@@ -1,18 +1,18 @@
 package fr.pantheonsorbonne.miage.player;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import fr.pantheonsorbonne.miage.card.Card;
 import fr.pantheonsorbonne.miage.card.DeckPile;
 import fr.pantheonsorbonne.miage.card.DiscardPile;
+import fr.pantheonsorbonne.miage.card.enums.DiscardedCards;
 import fr.pantheonsorbonne.miage.card.enums.PowerCardStatus;
 
 public abstract class Player {
     protected int numero;
     protected List<Card> hand;
-    protected List<Card> discardedCards;
+    protected DiscardedCards discardedCards;
     protected int points;
     protected Boolean sayYaniv;
     protected PlayerStatus playerStatus;
@@ -22,7 +22,7 @@ public abstract class Player {
         this.numero = numero;
         this.points = 0;
         this.hand = new LinkedList<Card>();
-        this.discardedCards = new ArrayList<Card>();
+        discardedCards = DiscardedCards.EMPTY;
         sayYaniv = false;
         playerStatus = PlayerStatus.NORMAL;
         powerCardStatus = PowerCardStatus.NOTHING;
@@ -34,6 +34,10 @@ public abstract class Player {
 
     public abstract void winPower();
 
+    public abstract void discardCards(DiscardPile discardPile);
+
+    public abstract List<Card> chooseDiscardCards();
+
     public int getNumero() {
         return this.numero;
     }
@@ -43,7 +47,7 @@ public abstract class Player {
     }
 
     public List<Card> getDiscardedCards() {
-        return this.discardedCards;
+        return this.discardedCards.getList();
     }
 
     public int getPoints() {
@@ -63,11 +67,16 @@ public abstract class Player {
     }
 
     public void resetDiscardedCards() {
-        this.discardedCards = null;
+        discardedCards.reset();
+        this.discardedCards = DiscardedCards.EMPTY;
     }
 
     public void setDiscardedCards(List<Card> discardedCards) {
-        this.discardedCards = discardedCards;
+        this.discardedCards.setList(discardedCards);
+    }
+
+    public DiscardedCards getdiscardedCards() {
+        return discardedCards;
     }
 
     public void pickDeckPile(DeckPile deckPile) { // pioche 1 carte
@@ -78,22 +87,22 @@ public abstract class Player {
         hand.add(discardPile.takeFist());
     }
 
-    public abstract void discardCards(DiscardPile discardPile);
-
-    public abstract List<Card> chooseDiscardCards();
-
     public void addPoints(List<Card> hand) {
-        points += sumPoints(hand);
+        points += sumPointsHand();
     }
 
     public void addPoints(int nb) {
         points += nb;
     }
 
-    public int sumPoints(List<Card> hand) {
+    public int sumPointsHand() {
         int sum = 0;
-        for (Card card : hand) {
-            sum += card.getCardValue().getRank();
+        if (hand != null || !hand.isEmpty()) {
+            for (Card card : hand) {
+                sum += card.getCardValue().getValue();
+            }
+        }else{
+            //renvoyer exception
         }
         return sum;
     }
@@ -106,24 +115,12 @@ public abstract class Player {
         return false;
     }
 
-    public boolean hasAssafDeclaration(final Player playerSayYaniv) {
-        if (sumPoints(hand) <= playerSayYaniv.sumPoints(playerSayYaniv.getHand())
+    public boolean hasAssafDeclaration(Player playerSayYaniv) {
+        if (sumPointsHand() <= playerSayYaniv.sumPointsHand()
                 && playerStatus != PlayerStatus.YANIV) {
-            System.out.println("Le joueur " + getNumero() + " déclare 'Assaf'. Le joueur " + playerSayYaniv.getNumero()
-                    + " est pénalisé et récupère 30 points.");
             return true;
         }
         return false;
-    }
-
-    public int pointsHand() {
-        int nb = 0;
-        if (hand != null || !hand.isEmpty()) {
-            for (Card card : hand) {
-                nb += card.getCardValue().getValue();
-            }
-        }
-        return nb;
     }
 
     public PowerCardStatus getPowerCardStatus() {

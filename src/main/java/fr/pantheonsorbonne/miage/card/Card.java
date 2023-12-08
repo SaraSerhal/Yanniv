@@ -105,4 +105,18 @@ public class Card {
     public String toString() { //Renvoie une représentation textuelle de la carte sous forme de chaîne de caractères, combinant la valeur et la couleur.
         return this.getCardValue().getStringRepresentation() + this.getColor().getStringRepresentation();
     }
+
+    public boolean isNextCard(Card c){
+        if(c.getCardValue().getRank()==value.getRank()+1&& c.getColor()==color){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPreviousCard(Card c){
+        if(c.getCardValue().getRank()==value.getRank()-1&& c.getColor()==color){
+            return true;
+        }
+        return false;
+    }
 }

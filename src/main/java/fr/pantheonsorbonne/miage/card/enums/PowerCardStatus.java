@@ -6,5 +6,5 @@ public enum PowerCardStatus {
     DOUBLE8,
     DOUBLE9,
     DOUBLE10,
-    SEQUENCE
+    SEQUENCE_10_11_12
 }
