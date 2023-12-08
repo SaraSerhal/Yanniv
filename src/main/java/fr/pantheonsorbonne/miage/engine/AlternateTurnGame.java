@@ -172,7 +172,7 @@ public abstract class AlternateTurnGame extends GameImpl {
         for (Player player : players) {
             player.resetDiscardedCards();
             if (player != currentPlayer) {
-                player.addPoint(player.getHand());
+                player.addPoints(player.getHand());
                 System.out.println("Joueur " + player.getNumero() + " : " + player.getPoints());
                 boolean assaf=false;
                 if (player.hasAssafDeclaration(currentPlayer)&&!assaf) {// on ne peut déclarer assaf q'une seule fois a la fin d'une manche

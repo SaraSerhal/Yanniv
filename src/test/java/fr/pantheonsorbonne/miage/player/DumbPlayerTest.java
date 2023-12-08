@@ -23,7 +23,7 @@ public class DumbPlayerTest {
         deckPile.randomDeck();
         Card card = new Card(CardColor.HEART,CardValue.ACE);
         player.setHand(List.of(card));
-        player.addPoint(List.of(card));
+        player.addPoints(List.of(card));
         player.play(discardPile,deckPile,true);
         assertEquals("YANIV",player.getPlayerStatus().name());
         
