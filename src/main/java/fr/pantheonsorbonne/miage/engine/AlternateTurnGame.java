@@ -190,7 +190,7 @@ public abstract class AlternateTurnGame extends GameImpl {
     @Override
     public void endOfGame() {
         if (this.nbPlayers == 1) {
-            System.out.println("Le joueur " + currentPlayer.getNumero() + " remporte la  partie!");
+            System.out.println("Le joueur " + players.get(0).getNumero() + " remporte la  partie!");
             hasNextRound = false;
         }
     }
