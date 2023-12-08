@@ -12,10 +12,10 @@ import fr.pantheonsorbonne.miage.card.Card;
 import fr.pantheonsorbonne.miage.card.DeckPile;
 import fr.pantheonsorbonne.miage.card.enums.CardColor;
 import fr.pantheonsorbonne.miage.card.enums.CardValue;
+import fr.pantheonsorbonne.miage.card.enums.PowerCardStatus;
 
 public class PlayerTest{
 
-    PlayerTest engine;
     Player player;
     Card card;
 
@@ -123,12 +123,42 @@ public class PlayerTest{
     @Test
     public void testpickDeckPile(){
         player = new DumbPlayer(1);
-        DeckPile deck = new DeckPile(); 
         List<Card> hand = new LinkedList<Card>();
         Card card = new Card(CardColor.HEART,CardValue.TWO);
         hand.add(card);
-        player.pickDeckPile(deck, hand);
+        player.setHand(hand);
+        DeckPile deck = new DeckPile(); 
+        deck.randomDeck();
+        player.pickDeckPile(deck);
         assertEquals(2,hand.size());
+    }
+
+    @Test
+    public void testGetPowerCardStatus(){
+        player = new DumbPlayer(1);
+        assertEquals("NOTHING",player.getPowerCardStatus().name());
+    }
+
+    @Test
+    public void testSetPowerCardStatus(){
+        player = new DumbPlayer(1);
+        player.setPowerCardStatus(PowerCardStatus.DOUBLE7);
+        assertEquals("DOUBLE7", player.getPowerCardStatus().name());
+    }
+
+    @Test
+    public void testHasAssafDeclaration(){
+        Player player1 = new DumbPlayer(1);
+        Card cardHandPlayer1 = new Card(CardColor.HEART,CardValue.FOUR);
+        Card cardHand1 = new Card(CardColor.DIAMOND,CardValue.ACE);
+
+        player1.setHand(List.of(cardHandPlayer1,cardHand1));
+        Player playerSayYaniv = new DumbPlayer(2);
+        Card cardPlayerSayYaniv = new Card(CardColor.SPADE,CardValue.SEVEN);
+        playerSayYaniv.setHand(List.of(cardPlayerSayYaniv));
+
+        assertEquals(true,player1.hasAssafDeclaration(playerSayYaniv));
+        
     }
     
 }

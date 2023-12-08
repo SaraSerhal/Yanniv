@@ -10,11 +10,10 @@ class GameStatusTest {
 
   @Test
     public void testGetGameStatus(){
-        GameLocal game = new GameLocal();
-        assertEquals("ONGOING",GameStatus.ONGOING);
+        Game game = new GameLocal();
+        GameStatus status = GameStatus.ONGOING;
+        assertEquals("ONGOING",status.name());
 
     }
-
-
     
 }

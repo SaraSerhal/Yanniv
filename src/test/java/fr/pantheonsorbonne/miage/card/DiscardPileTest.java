@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import fr.pantheonsorbonne.miage.card.Card;
 import fr.pantheonsorbonne.miage.card.DiscardPile;
-import fr.pantheonsorbonne.miage.card.Pile;
 import fr.pantheonsorbonne.miage.card.enums.CardColor;
 import fr.pantheonsorbonne.miage.card.enums.CardValue;
 
@@ -20,10 +19,9 @@ class DiscardPileTest{
     public void addTest(){
         DiscardPile discardPile = new DiscardPile();
         Card card = new Card(CardColor.HEART, CardValue.TEN);
-        
-        discardPile.add(List.of(card));
-        assertEquals(1,discardPile.size());
-    
+        Card card2 = new Card(CardColor.CLUB,CardValue.ACE);
+        discardPile.add(List.of(card, card2));
+        assertEquals(2,discardPile.size());
 
     }
 }

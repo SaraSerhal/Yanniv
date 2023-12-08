@@ -1,6 +1,5 @@
-package fr.pantheonsorbonne.miage.game;
+package fr.pantheonsorbonne.miage.card;
 
-import fr.pantheonsorbonne.miage.card.Card;
 import fr.pantheonsorbonne.miage.card.enums.CardColor;
 import fr.pantheonsorbonne.miage.card.enums.CardValue;
 
@@ -45,4 +44,13 @@ class CardTest {
         assertEquals(CardValue.TEN, Card.valueOf("10D").getCardValue());
         assertEquals(CardColor.DIAMOND, Card.valueOf("10D").getColor());
     }
+
+    @Test
+    public void testToFancyString(){
+        Card card = new Card(CardColor.HEART,CardValue.TEN);
+        assertEquals("🂺",card.toFancyString());
+
+    }
+
+    
 }
