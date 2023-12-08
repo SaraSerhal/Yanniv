@@ -14,13 +14,15 @@ public class Card {
     private final CardColor color;
     private final CardValue value;
 
-
-    public Card(CardColor color, CardValue value) { //créer une nouvelle instance de la classe Card avec une couleur et une valeur spécifiées.
+    public Card(CardColor color, CardValue value) { // créer une nouvelle instance de la classe Card avec une couleur et
+                                                    // une valeur spécifiées.
         this.color = color;
         this.value = value;
     }
 
-    public static String cardsToString(Card[] cards) { // Convertit un tableau de cartes en une seule chaîne de caractères, où les cartes sont séparées par des points-virgules (;).
+    public static String cardsToString(Card[] cards) { // Convertit un tableau de cartes en une seule chaîne de
+                                                       // caractères, où les cartes sont séparées par des
+                                                       // points-virgules (;).
         return Arrays.stream(cards).map(Card::toString).collect(Collectors.joining(";"));
     }
 
@@ -42,7 +44,9 @@ public class Card {
         return color;
     }
 
-    public static Card[] stringToCards(String cards) {  //Convertit une chaîne de caractères représentant des cartes (séparées par des points-virgules) en un tableau d'objets Card.
+    public static Card[] stringToCards(String cards) { // Convertit une chaîne de caractères représentant des cartes
+                                                       // (séparées par des points-virgules) en un tableau d'objets
+                                                       // Card.
         if (cards.isEmpty()) {
             return new Card[0];
         }
@@ -56,10 +60,12 @@ public class Card {
      * @return the card
      * @throws RuntimeException if the String representation is Invaliid
      */
-    public static Card valueOf(String str) { //Convertit une représentation textuelle d'une carte en un objet Card. La méthode prend en charge la représentation des cartes avec des valeurs à deux chiffres (comme 10).
+    public static Card valueOf(String str) { // Convertit une représentation textuelle d'une carte en un objet Card. La
+                                             // méthode prend en charge la représentation des cartes avec des valeurs à
+                                             // deux chiffres (comme 10).
         CardValue value;
         CardColor color;
-        if (str.length() == 3) {//it's a 10
+        if (str.length() == 3) {// it's a 10
             value = CardValue.valueOfStr(str.substring(0, 2));
             color = CardColor.valueOfStr(str.substring(2, 3));
         } else {
@@ -70,7 +76,8 @@ public class Card {
 
     }
 
-    public static List<Card> getAllPossibleCards() { //Génère et renvoie une liste de toutes les cartes possibles en combinant toutes les valeurs et couleurs disponibles.
+    public static List<Card> getAllPossibleCards() { // Génère et renvoie une liste de toutes les cartes possibles en
+                                                     // combinant toutes les valeurs et couleurs disponibles.
         List<Card> possibleCards = new ArrayList<>(CardColor.values().length * CardValue.values().length);
         for (CardColor color : CardColor.values()) {
             for (CardValue value : CardValue.values()) {
@@ -80,7 +87,8 @@ public class Card {
         return possibleCards;
     }
 
-    public String toFancyString() {  // Renvoie une représentation stylisée de la carte sous forme de chaîne de caractères
+    public String toFancyString() { // Renvoie une représentation stylisée de la carte sous forme de chaîne de
+                                    // caractères
         int rank = this.getCardValue().ordinal();
         if (rank > 10) {
             rank++;
@@ -89,20 +97,37 @@ public class Card {
     }
 
     @Override
-    public int hashCode() {  // retourne un code de hachage basé sur la couleur et la valeur de la carte.
+    public int hashCode() { // retourne un code de hachage basé sur la couleur et la valeur de la carte.
         return Objects.hash(getColor(), getCardValue());
     }
 
     @Override
     public boolean equals(Object o) { // verifier l'égalité entre deux cartes basée sur leur couleur et leur valeur.
-        if (this == o) return true;
-        if (!(o instanceof Card)) return false;
+        if (this == o)
+            return true;
+        if (!(o instanceof Card))
+            return false;
         Card card = (Card) o;
         return getColor() == card.getColor() && getCardValue() == card.getCardValue();
     }
 
     @Override
-    public String toString() { //Renvoie une représentation textuelle de la carte sous forme de chaîne de caractères, combinant la valeur et la couleur.
+    public String toString() { // Renvoie une représentation textuelle de la carte sous forme de chaîne de
+                               // caractères, combinant la valeur et la couleur.
         return this.getCardValue().getStringRepresentation() + this.getColor().getStringRepresentation();
+    }
+
+    public boolean isNextCard(Card c) {
+        if (c.getCardValue().getRank() == value.getRank() + 1 && c.getColor() == color) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPreviousCard(Card c) {
+        if (c.getCardValue().getRank() == value.getRank() - 1 && c.getColor() == color) {
+            return true;
+        }
+        return false;
     }
 }

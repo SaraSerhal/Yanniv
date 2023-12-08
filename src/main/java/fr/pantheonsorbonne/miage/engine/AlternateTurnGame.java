@@ -21,16 +21,14 @@ public abstract class AlternateTurnGame extends GameImpl {
     }
 
     public Player getFirstPlayerRound() {
-        if (numRound == 1) {
-            currentPlayer = players.get(random.nextInt(nbPlayers));
-        } else {
-            for (Player player : players) {
-                if (player.getPlayerStatus() == PlayerStatus.YANIV) {
-                    currentPlayer = player;
-                    break;
-                }
+        for (Player player : players) {
+            if (player.getPlayerStatus() == PlayerStatus.YANIV) {
+                currentPlayer = player;
+                player.setPlayerStatus(PlayerStatus.NORMAL);
+                break;
             }
         }
+        currentPlayer = players.get(random.nextInt(nbPlayers));
         return currentPlayer;
     }
 
@@ -86,7 +84,7 @@ public abstract class AlternateTurnGame extends GameImpl {
             if (canPlay) {
                 currentPlayer.play(discardPile, deckPile, canChooseOnlyDeck);
             }
-            System.out.println(currentPlayer.getPowerCardStatus());
+            System.out.println("Pouvoir des cartes défaussées: "+currentPlayer.getPowerCardStatus());
 
             if (currentPlayer.getPowerCardStatus() != PowerCardStatus.NOTHING) {
                 System.out.println("***************");
@@ -109,7 +107,7 @@ public abstract class AlternateTurnGame extends GameImpl {
         PowerCardStatus powerCardStatus = player.getPowerCardStatus();
         boolean canPlay = true;
 
-        if (powerCardStatus == PowerCardStatus.SEQUENCE) {
+        if (powerCardStatus == PowerCardStatus.SEQUENCE_10_11_12) {
             // Alors si le currentPlayer a un k de la même couleur il le met sinon il pioche
             // et il joue pas
             Optional<Card> optionalCardKSameColor = optionalCardKSameColor(discardPile);
@@ -176,8 +174,12 @@ public abstract class AlternateTurnGame extends GameImpl {
             if (player != currentPlayer) {
                 player.addPoint(player.getHand());
                 System.out.println("Joueur " + player.getNumero() + " : " + player.getPoints());
-                if (player.hasAssafDeclaration(currentPlayer)) {
+                boolean assaf=false;
+                if (player.hasAssafDeclaration(currentPlayer)&&!assaf) {// on ne peut déclarer assaf q'une seule fois a la fin d'une manche
+                    System.out.println("Le joueur " + player.getNumero() + " déclare 'Assaf' puisqu'il a "+player.sumPointsHand()+" points dans ses mains contre "+currentPlayer.sumPointsHand()+" points dans celles de celui du joueur "+currentPlayer.getNumero()+". Le joueur " + currentPlayer.getNumero()
+                    + " est pénalisé et récupère 30 points.");
                     currentPlayer.addPoints(30);
+                    assaf=true;
                 }
             }
         }
@@ -188,7 +190,7 @@ public abstract class AlternateTurnGame extends GameImpl {
     @Override
     public void endOfGame() {
         if (this.nbPlayers == 1) {
-            System.out.println("Le joueur " + currentPlayer.getNumero() + " remporte la  partie!");
+            System.out.println("Le joueur " + players.get(0).getNumero() + " remporte la  partie!");
             hasNextRound = false;
         }
     }
