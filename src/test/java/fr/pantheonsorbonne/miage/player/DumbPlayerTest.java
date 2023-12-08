@@ -1,6 +1,5 @@
 package fr.pantheonsorbonne.miage.player;
 
-
 //import fr.pantheonsorbonne.miage.card.DeterministDeck;
 //import fr.pantheonsorbonne.miage.engine.local.LocalWarGame;
 //import fr.pantheonsorbonne.miage.exception.NoMoreCardException;
@@ -12,34 +11,34 @@ import org.junit.jupiter.api.Test;
 //import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-//mvn clean package site 
-public class DumbPlayerTest{
+
+//mvn clean package site
+public class DumbPlayerTest {
 
     DumbPlayerTest engine;
     DumbPlayer player;
-    
-    
 
     @Test
-    public void testgetName(){
-        DumbPlayer player = new DumbPlayer("Sara");
-        assertEquals("Sara", player.getName());
+    public void testgetName() {
+        DumbPlayer player = new DumbPlayer(1);
+        assertEquals(1, player.getNumero());
 
-    } 
-   @Test
-    public void testSetPlayerStatus(){
-        DumbPlayer player = new DumbPlayer("Sara");
+    }
+
+    @Test
+    public void testSetPlayerStatus() {
+        DumbPlayer player = new DumbPlayer(1);
         player.setPlayerStatus(PlayerStatus.NORMAL);
         assertEquals("NORMAL", player.getPlayerStatus().name());
     }
 
-    /*  @Test
-    public void testgetPlayerStatus(){
-        DumbPlayer player = new DumbPlayer("Sara");
-        player.setPlayerStatus(PlayerStatus.LOSER);
-        assertEquals("LOSER", player.getPlayerStatus());
-    } */
+    /*
+     * @Test
+     * public void testgetPlayerStatus(){
+     * DumbPlayer player = new DumbPlayer("Sara");
+     * player.setPlayerStatus(PlayerStatus.LOSER);
+     * assertEquals("LOSER", player.getPlayerStatus());
+     * }
+     */
 
-
-    
 }

@@ -47,7 +47,8 @@ public abstract class GameImpl implements Game {
         initializePlayers();
         System.out.println("Nous avons " + nbPlayers + " joueurs");
         System.out.println("La partie commence: ");
-        while(hasNextRound){ // boucle qui s'arrete quand la partie est finie, chaque itération est une manche
+        while (hasNextRound) { // boucle qui s'arrete quand la partie est finie, chaque itération est une
+                               // manche
             installation();
             goNextRound();
         }
@@ -62,9 +63,9 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void initializePlayers(){ //changer  pour smartPlayer
-        for(int i=0;i<nbPlayers;i++){
-            Player player= new SmartPlayer(i+1);
+    public void initializePlayers() { // changer pour smartPlayer
+        for (int i = 0; i < nbPlayers; i++) {
+            Player player = new SmartPlayer(i + 1);
             players.add(player);
         }
     }

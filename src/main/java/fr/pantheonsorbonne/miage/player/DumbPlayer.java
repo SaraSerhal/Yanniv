@@ -116,7 +116,8 @@ public class DumbPlayer extends Player {
             player.setHand(handPlayer);
             System.out.println("Le joueur a choisi de prendre la carte " + card.toString() + " du joueur suivant");
         } else {
-            System.out.println("Le joueur a choisi de ne pas prendre la carte " + card.toString()+" du joueur suivant");
+            System.out
+                    .println("Le joueur a choisi de ne pas prendre la carte " + card.toString() + " du joueur suivant");
         }
     }
 

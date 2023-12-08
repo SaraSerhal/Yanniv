@@ -24,7 +24,7 @@ class CardTest {
 
     @Test
     void getValue() {
-        assertEquals(CardValue.ACE, Card.valueOf("1S").getValue());
+        assertEquals(CardValue.ACE, Card.valueOf("1S").getCardValue());
 
     }
 
@@ -42,7 +42,7 @@ class CardTest {
 
     @Test
     void valueOf() {
-        assertEquals(CardValue.TEN, Card.valueOf("10D").getValue());
+        assertEquals(CardValue.TEN, Card.valueOf("10D").getCardValue());
         assertEquals(CardColor.DIAMOND, Card.valueOf("10D").getColor());
     }
 }
