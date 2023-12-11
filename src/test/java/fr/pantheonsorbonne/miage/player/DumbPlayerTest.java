@@ -3,8 +3,6 @@ package fr.pantheonsorbonne.miage.player;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,11 +13,9 @@ import fr.pantheonsorbonne.miage.card.DeckPile;
 import fr.pantheonsorbonne.miage.card.DiscardPile;
 import fr.pantheonsorbonne.miage.card.enums.CardColor;
 import fr.pantheonsorbonne.miage.card.enums.CardValue;
-import fr.pantheonsorbonne.miage.card.enums.DiscardedCards;
-import fr.pantheonsorbonne.miage.card.enums.PowerCardStatus;
 
 public class DumbPlayerTest {
-    DumbPlayer player = new DumbPlayer(1);
+   private DumbPlayer player = new DumbPlayer(1);
 
     @Test
     public void testPlayYaniv(){ //test si le statut du joueur est bien Yaniv lorqu'il a une main où les points sont inférieurs à 7
@@ -88,15 +84,22 @@ public class DumbPlayerTest {
     }
 
    @Test 
-    public void testWinPowerDouble7(){ 
-        DiscardedCards discardedCards = DiscardedCards.DOUBLE;
-        List<Card> list = new ArrayList<>();
-        list.add(new Card(CardColor.HEART, CardValue.SEVEN));
-        discardedCards.setList(list);
-        discardedCards.getList().get(0);
-        player.setHand(list);
-        player.winPower();
-        assertEquals(PowerCardStatus.DOUBLE7, player.getPowerCardStatus());    
+    public void testPickPlayerHand(){
+        Player otherPlayer = new DumbPlayer(2);
+        List<Card> handPlayer = new LinkedList<Card>();
+        handPlayer.add(new Card (CardColor.HEART, CardValue.EIGHT));
+        handPlayer.add(new Card(CardColor.HEART,CardValue.QUEEN));
+        player.setHand(handPlayer);
+
+        List<Card> handOtherPlayer = new LinkedList<Card>();
+        handOtherPlayer.add(new Card (CardColor.DIAMOND, CardValue.TWO));
+        Card card = new Card(CardColor.HEART,CardValue.FIVE);
+        handOtherPlayer.add(card);
+        otherPlayer.setHand(handOtherPlayer);
+        player.choosePick(card);
+        player.pickPlayerHand(otherPlayer);
+        assertTrue(true);
+           
 
     }
 

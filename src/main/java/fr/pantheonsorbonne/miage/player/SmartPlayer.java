@@ -1,6 +1,7 @@
 package fr.pantheonsorbonne.miage.player;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import fr.pantheonsorbonne.miage.card.Card;
@@ -61,7 +62,7 @@ public class SmartPlayer extends DumbPlayer {
                 .anyMatch(e -> e.getCardValue().getRank() == discardPile.getFirst().getCardValue().getRank());
             // si le numero de la premiere carte de la pile de defausse n'est pas egale a l'un des
             // numero des cartes de la main du joueur
-        }//sinon exception
+        }
         else return true;
     }
 
@@ -69,6 +70,8 @@ public class SmartPlayer extends DumbPlayer {
     public boolean choosePick(Card card){
         //en ajoutant cette carte a la main du joueur, on vérifie si le joueur peut former une suite avec cette carte. Si oui, il choisit de prendre la carte
         boolean pick=false;
+        List<Card> hand = new LinkedList<Card>();
+        DiscardedCards discardedCards = DiscardedCards.SEQUENCE;
         List <Card> newHand=new ArrayList<>(hand);
         newHand.add(card);
         if(discardedCards.hasSequence(newHand)){

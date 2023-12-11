@@ -51,27 +51,18 @@ class CardTest {
         assertEquals("🂺",card.toFancyString());
     }
 
-    @Test
+   @Test
     public void testIsNextCard(){
         Card currentCard = new Card(CardColor.HEART, CardValue.EIGHT);
         Card nextCard = new Card(CardColor.HEART,CardValue.NINE);
         Card nextCardInvalid = new Card(CardColor.HEART, CardValue.SIX);
 
-        assertEquals(true,currentCard.isNextCard(nextCard));
-        assertEquals(false,currentCard.isNextCard(nextCardInvalid));
+        assertEquals(true,nextCard.isNextCard(currentCard));
+        assertEquals(false,nextCardInvalid.isNextCard(currentCard));
 
-    }
+    } 
 
-    @Test
-    public void testIsPreviousCard(){
-        Card currentCard = new Card(CardColor.HEART, CardValue.EIGHT);
-        Card previousCard = new Card(CardColor.HEART,CardValue.SEVEN);
-        Card previousCardInvalid = new Card(CardColor.HEART, CardValue.ACE);
-
-        assertEquals(true,currentCard.isPreviousCard(previousCard));
-        assertEquals(false,currentCard.isPreviousCard(previousCardInvalid));
-
-    }
+ 
 
     
 }

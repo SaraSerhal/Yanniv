@@ -14,7 +14,7 @@ import java.util.List;
 class DiscardPileTest{
 
     @Test
-    public void addTest(){
+    public void add(){
         DiscardPile discardPile = new DiscardPile();
         Card card = new Card(CardColor.HEART, CardValue.TEN);
         

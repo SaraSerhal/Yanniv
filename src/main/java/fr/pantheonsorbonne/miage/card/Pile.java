@@ -2,12 +2,11 @@ package fr.pantheonsorbonne.miage.card;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 public abstract class Pile {
     protected Deque<Card> pile; // stocker les cartes dans une pile
-    // remplacer par queue
+
 
     public Pile() {
         pile = new ArrayDeque<>();

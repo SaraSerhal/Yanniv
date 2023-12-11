@@ -119,13 +119,13 @@ public class DiscardedCardsTest {
 
     @Test
     public void testHasSequenceIsTrue(){
-        List<Card> handWithoutSequence = new ArrayList<>();
-        handWithoutSequence.add(new Card(CardColor.CLUB, CardValue.SIX));
-        handWithoutSequence.add(new Card(CardColor.CLUB, CardValue.SEVEN));
-        handWithoutSequence.add(new Card(CardColor.CLUB, CardValue.EIGHT));
-        handWithoutSequence.add(new Card(CardColor.HEART, CardValue.ACE));
-        DiscardedCards.SEQUENCE.setList(handWithoutSequence);    
-        assertTrue(DiscardedCards.SEQUENCE.hasSequence(handWithoutSequence));
+        List<Card> handWithSequence = new ArrayList<>();
+        handWithSequence.add(new Card(CardColor.CLUB, CardValue.SIX));
+        handWithSequence.add(new Card(CardColor.CLUB, CardValue.SEVEN));
+        handWithSequence.add(new Card(CardColor.CLUB, CardValue.EIGHT));
+        handWithSequence.add(new Card(CardColor.HEART, CardValue.ACE));
+        DiscardedCards.SEQUENCE.setList(handWithSequence);    
+        assertTrue(DiscardedCards.SEQUENCE.hasSequence(handWithSequence));
     }
 
     @Test

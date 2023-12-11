@@ -7,8 +7,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import fr.pantheonsorbonne.miage.card.Card;
-import fr.pantheonsorbonne.miage.card.DeckPile;
-import fr.pantheonsorbonne.miage.card.DiscardPile;
 
 public enum DiscardedCards {
     EMPTY(null),
