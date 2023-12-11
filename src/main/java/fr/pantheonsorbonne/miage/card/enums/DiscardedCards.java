@@ -3,6 +3,7 @@ package fr.pantheonsorbonne.miage.card.enums;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import fr.pantheonsorbonne.miage.card.Card;
@@ -148,7 +149,7 @@ public enum DiscardedCards {
 
     public Card highestCard(List<Card> listCard) {
         if (listCard == null || listCard.isEmpty()) {
-            throw new IllegalArgumentException("La liste de cartes est vide ou nulle.");
+            throw new NoSuchElementException("Il n'y a pas de cartes, la pile est vide.");
         }
         Card c = listCard.get(0);
         for (Card card : listCard) {

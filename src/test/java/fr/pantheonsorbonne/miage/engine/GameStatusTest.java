@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test;
 import fr.pantheonsorbonne.miage.engine.local.GameLocal;
 
 class GameStatusTest {
+  Game game = new GameLocal();
+
 
   @Test
     public void testGetGameStatus(){
-        Game game = new GameLocal();
         GameStatus status = GameStatus.ONGOING;
         assertEquals("ONGOING",status.name());
 

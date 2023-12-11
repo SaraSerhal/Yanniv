@@ -45,10 +45,31 @@ class CardTest {
         assertEquals(CardColor.DIAMOND, Card.valueOf("10D").getColor());
     }
 
-    @Test
+   @Test
     public void testToFancyString(){
         Card card = new Card(CardColor.HEART,CardValue.TEN);
         assertEquals("🂺",card.toFancyString());
+    }
+
+    @Test
+    public void testIsNextCard(){
+        Card currentCard = new Card(CardColor.HEART, CardValue.EIGHT);
+        Card nextCard = new Card(CardColor.HEART,CardValue.NINE);
+        Card nextCardInvalid = new Card(CardColor.HEART, CardValue.SIX);
+
+        assertEquals(true,currentCard.isNextCard(nextCard));
+        assertEquals(false,currentCard.isNextCard(nextCardInvalid));
+
+    }
+
+    @Test
+    public void testIsPreviousCard(){
+        Card currentCard = new Card(CardColor.HEART, CardValue.EIGHT);
+        Card previousCard = new Card(CardColor.HEART,CardValue.SEVEN);
+        Card previousCardInvalid = new Card(CardColor.HEART, CardValue.ACE);
+
+        assertEquals(true,currentCard.isPreviousCard(previousCard));
+        assertEquals(false,currentCard.isPreviousCard(previousCardInvalid));
 
     }
 
