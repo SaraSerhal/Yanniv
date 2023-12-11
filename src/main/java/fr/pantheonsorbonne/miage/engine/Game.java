@@ -16,12 +16,8 @@ public interface Game {
 
     void endOfGame();
 
-    void removeLosers();
-
     void giveCardsToPlayer();
 
     void installation();
-
-    void initializePlayers();
 
 }

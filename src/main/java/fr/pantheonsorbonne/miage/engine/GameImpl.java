@@ -62,7 +62,6 @@ public abstract class GameImpl implements Game {
         giveCardsToPlayer();
     }
 
-    @Override
     public void initializePlayers() { // changer pour smartPlayer
         for (int i = 0; i < nbPlayers; i++) {
             Player player = new SmartPlayer(i + 1);
