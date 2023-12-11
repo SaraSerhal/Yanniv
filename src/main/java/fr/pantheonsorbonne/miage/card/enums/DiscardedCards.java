@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import fr.pantheonsorbonne.miage.card.Card;
+import fr.pantheonsorbonne.miage.card.DeckPile;
+import fr.pantheonsorbonne.miage.card.DiscardPile;
 
 public enum DiscardedCards {
     EMPTY(null),
@@ -113,22 +115,20 @@ public enum DiscardedCards {
                                                  // dans list sinon renvoie false
         Card c;
         int nb = 1;
-        List <Card> listLocal=new ArrayList<>();
         for (int i = 0; i < hand.size() - 1; i++) {
             c = hand.get(i);
-            listLocal.add(c);
+            list.add(c);
             for (int j = i + 1; j < hand.size(); j++) {
                 if (hand.get(j).isNextCard(c)) {
-                    listLocal.add(hand.get(j));
+                    list.add(hand.get(j));
                     nb++;
                     c = hand.get(j);
                 }
             }
             if (nb >= 3) {
-                list=listLocal;
                 return true;
             } else {
-                listLocal.clear();
+                list.clear();
                 nb = 1;
             }
         }

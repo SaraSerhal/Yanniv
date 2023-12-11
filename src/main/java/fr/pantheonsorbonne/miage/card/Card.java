@@ -118,16 +118,10 @@ public class Card {
     }
 
     public boolean isNextCard(Card c) {
-        if (c.getCardValue().getRank() == value.getRank() + 1 && c.getColor() == color) {
+        if (c.getCardValue().getRank()+1 == value.getRank() && c.getColor() == color) {
             return true;
         }
         return false;
     }
 
-    public boolean isPreviousCard(Card c) {
-        if (c.getCardValue().getRank() == value.getRank() - 1 && c.getColor() == color) {
-            return true;
-        }
-        return false;
-    }
 }
