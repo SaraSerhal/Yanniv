@@ -113,21 +113,22 @@ public enum DiscardedCards {
                                                  // dans list sinon renvoie false
         Card c;
         int nb = 1;
+        List <Card> listLocal=new ArrayList<>();
         for (int i = 0; i < hand.size() - 1; i++) {
             c = hand.get(i);
-            list.add(c);
+            listLocal.add(c);
             for (int j = i + 1; j < hand.size(); j++) {
                 if (hand.get(j).isNextCard(c)) {
-                    list.add(hand.get(j));
+                    listLocal.add(hand.get(j));
                     nb++;
                     c = hand.get(j);
                 }
             }
             if (nb >= 3) {
+                list=listLocal;
                 return true;
             } else {
-                list.clear();
-                c = hand.get(i + 1);
+                listLocal.clear();
                 nb = 1;
             }
         }
