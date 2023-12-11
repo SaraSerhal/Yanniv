@@ -3,6 +3,7 @@ package fr.pantheonsorbonne.miage.card.enums;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import fr.pantheonsorbonne.miage.card.Card;
@@ -124,10 +125,10 @@ public enum DiscardedCards {
                 }
             }
             if (nb >= 3) {
+                DiscardedCards.SEQUENCE.setList(new ArrayList<>(list));
                 return true;
             } else {
                 list.clear();
-                c = hand.get(i + 1);
                 nb = 1;
             }
         }
@@ -149,7 +150,7 @@ public enum DiscardedCards {
 
     public Card highestCard(List<Card> listCard) {
         if (listCard == null || listCard.isEmpty()) {
-            // renvoyer une exception
+            throw new NoSuchElementException("Il n'y a pas de cartes, la pile est vide.");
         }
         Card c = listCard.get(0);
         for (Card card : listCard) {

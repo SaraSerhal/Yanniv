@@ -2,6 +2,7 @@ package fr.pantheonsorbonne.miage.card;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public abstract class Pile {
@@ -44,8 +45,8 @@ public abstract class Pile {
         pile.addAll(cards);
     }
 
-    public void add(Card card) {
-        pile.add(card);
+    public void add(Card list) {
+        pile.add(list);
     }
 
     public void clear() {

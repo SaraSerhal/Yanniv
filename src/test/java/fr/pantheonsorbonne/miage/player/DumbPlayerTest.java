@@ -1,7 +1,10 @@
 package fr.pantheonsorbonne.miage.player;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,12 +15,15 @@ import fr.pantheonsorbonne.miage.card.DeckPile;
 import fr.pantheonsorbonne.miage.card.DiscardPile;
 import fr.pantheonsorbonne.miage.card.enums.CardColor;
 import fr.pantheonsorbonne.miage.card.enums.CardValue;
+import fr.pantheonsorbonne.miage.card.enums.DiscardedCards;
+import fr.pantheonsorbonne.miage.card.enums.PowerCardStatus;
 
 public class DumbPlayerTest {
+    DumbPlayer player = new DumbPlayer(1);
 
     @Test
     public void testPlayYaniv(){ //test si le statut du joueur est bien Yaniv lorqu'il a une main où les points sont inférieurs à 7
-        DumbPlayer player = new DumbPlayer(1);
+        
         DiscardPile discardPile = new DiscardPile();
         DeckPile deckPile = new DeckPile();
         deckPile.randomDeck();
@@ -31,7 +37,7 @@ public class DumbPlayerTest {
 
     @Test //vérifier que le joueur a le statut YANIV si sa main est vide ce'est à dire qu'il n'a plus de cartes
     public void testYanniv(){
-        DumbPlayer player = new DumbPlayer(1);
+        
         List<Card> hand = new LinkedList<Card>();
         player.setHand(hand);
         DiscardPile discardPile = new DiscardPile();
@@ -43,10 +49,56 @@ public class DumbPlayerTest {
     }
 
     @Test 
-    public void testTakeOneCard(){
+    public void testTakeOneCardFromDeckPile(){ //le joueur a le choix de piocher une carte de la pioche seulement
+        
+        DiscardPile discardPile = new DiscardPile();
+        DeckPile deckPile = new DeckPile();
+        deckPile.add(new Card(CardColor.HEART,CardValue.TEN));
+        deckPile.add(new Card(CardColor.CLUB,CardValue.JACK));
+
+        List<Card> handPlayer = new LinkedList<Card>();
+        handPlayer.add(new Card (CardColor.HEART, CardValue.EIGHT));
+        handPlayer.add(new Card(CardColor.HEART,CardValue.QUEEN));
+        player.setHand(handPlayer);
+        player.takeOneCard(discardPile, deckPile, true);
+        assertTrue(discardPile.isEmpty());
+        assertEquals(1,deckPile.size());
+        assertEquals(3, handPlayer.size());
+
         
     }
-    
+    @Test 
+    public void testTakeOneCardFromDeckPileAndDiscardPile(){ //le joueur a le choix de piocher une carte de la pioche ou de la défausse
+        
+        DiscardPile discardPile = new DiscardPile();
+        discardPile.add(new Card(CardColor.DIAMOND,CardValue.SIX));
+        discardPile.add(new Card(CardColor.CLUB,CardValue.FOUR));
+
+        DeckPile deckPile = new DeckPile();
+        deckPile.add(new Card(CardColor.HEART,CardValue.TEN));
+        deckPile.add(new Card(CardColor.CLUB,CardValue.JACK));
+
+        List<Card> handPlayer = new LinkedList<Card>();
+        handPlayer.add(new Card (CardColor.HEART, CardValue.EIGHT));
+        handPlayer.add(new Card(CardColor.HEART,CardValue.QUEEN));
+        player.setHand(handPlayer);
+        player.takeOneCard(discardPile, deckPile, false);
+        assertEquals(3, handPlayer.size());
+        
+    }
+
+   @Test 
+    public void testWinPowerDouble7(){ 
+        DiscardedCards discardedCards = DiscardedCards.DOUBLE;
+        List<Card> list = new ArrayList<>();
+        list.add(new Card(CardColor.HEART, CardValue.SEVEN));
+        discardedCards.setList(list);
+        discardedCards.getList().get(0);
+        player.setHand(list);
+        player.winPower();
+        assertEquals(PowerCardStatus.DOUBLE7, player.getPowerCardStatus());    
+
+    }
 
 
 

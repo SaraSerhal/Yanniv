@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import fr.pantheonsorbonne.miage.card.enums.CardColor;
@@ -88,6 +86,12 @@ public class PileTest {
 
     @Test
     public void testGetFirst(){
+        Pile pile = new DeckPile();
+        Card card = new Card(CardColor.CLUB, CardValue.JACK);
+        Card card2 = new Card(CardColor.DIAMOND, CardValue.FIVE);
+        pile.add(card);
+        pile.add(card2);
+        assertEquals(card2,pile.getFirst());
         
     }
     

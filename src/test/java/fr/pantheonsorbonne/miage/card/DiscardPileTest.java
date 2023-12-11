@@ -2,9 +2,6 @@ package fr.pantheonsorbonne.miage.card;
 
 import org.junit.jupiter.api.Test;
 
-import fr.pantheonsorbonne.miage.card.Card;
-import fr.pantheonsorbonne.miage.card.DiscardPile;
-import fr.pantheonsorbonne.miage.card.Pile;
 import fr.pantheonsorbonne.miage.card.enums.CardColor;
 import fr.pantheonsorbonne.miage.card.enums.CardValue;
 

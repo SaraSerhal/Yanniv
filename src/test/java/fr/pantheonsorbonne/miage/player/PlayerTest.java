@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import fr.pantheonsorbonne.miage.card.Card;
 import fr.pantheonsorbonne.miage.card.DeckPile;
+import fr.pantheonsorbonne.miage.card.DiscardPile;
 import fr.pantheonsorbonne.miage.card.enums.CardColor;
 import fr.pantheonsorbonne.miage.card.enums.CardValue;
 import fr.pantheonsorbonne.miage.card.enums.PowerCardStatus;
@@ -104,7 +105,7 @@ public class PlayerTest{
         hand.add(card);
         hand.add(card2);
         player.setHand(hand);
-        //assertEquals(19,player.sumPoints(hand));
+        assertEquals(18,player.sumPointsHand());
     }
 
     @Test 
@@ -147,7 +148,7 @@ public class PlayerTest{
     }
 
     @Test
-    public void testHasAssafDeclaration(){
+    public void testHasAssafDeclarationTrue(){
         Player player1 = new DumbPlayer(1);
         Card cardHandPlayer1 = new Card(CardColor.HEART,CardValue.FOUR);
         Card cardHand1 = new Card(CardColor.DIAMOND,CardValue.ACE);
@@ -159,6 +160,46 @@ public class PlayerTest{
 
         assertEquals(true,player1.hasAssafDeclaration(playerSayYaniv));
         
+    }
+
+    @Test
+    public void testHasAssafDeclarationFalse(){
+        Player player1 = new DumbPlayer(1);
+        Card cardHandPlayer1 = new Card(CardColor.HEART,CardValue.SEVEN);
+        Card cardHand1 = new Card(CardColor.DIAMOND,CardValue.ACE);
+
+        player1.setHand(List.of(cardHandPlayer1,cardHand1));
+        Player playerSayYaniv = new DumbPlayer(2);
+        Card cardPlayerSayYaniv = new Card(CardColor.SPADE,CardValue.SEVEN);
+        playerSayYaniv.setHand(List.of(cardPlayerSayYaniv));
+
+        assertEquals(false,player1.hasAssafDeclaration(playerSayYaniv));
+        
+    }
+
+    @Test
+    public void testPickDiscardPile(){
+        player = new DumbPlayer(1);
+        DiscardPile discardPile = new DiscardPile();
+        Card discard1 = new Card(CardColor.CLUB, CardValue.TEN);
+        Card discard2 = new Card(CardColor.CLUB, CardValue.TWO);
+        discardPile.add(discard1);
+        discardPile.add(discard2);
+
+        Card card = new Card(CardColor.HEART,CardValue.FOUR);
+        Card card2 = new Card(CardColor.DIAMOND,CardValue.ACE);
+        Card card3 = new Card(CardColor.HEART,CardValue.QUEEN);
+
+        List<Card> hand = new LinkedList<Card>();
+        hand.add(card);
+        hand.add(card2);
+        hand.add(card3);
+        player.setHand(hand);
+        player.pickDiscardPile(discardPile);
+        assertEquals(4, player.getHand().size());
+
+
+
     }
     
 }
