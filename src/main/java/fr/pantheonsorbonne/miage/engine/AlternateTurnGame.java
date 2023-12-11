@@ -84,7 +84,7 @@ public abstract class AlternateTurnGame extends GameImpl {
             if (canPlay) {
                 currentPlayer.play(discardPile, deckPile, canChooseOnlyDeck);
             }
-            System.out.println("Pouvoir des cartes défaussées: "+currentPlayer.getPowerCardStatus());
+            System.out.println("Pouvoir des cartes défaussées: " + currentPlayer.getPowerCardStatus());
 
             if (currentPlayer.getPowerCardStatus() != PowerCardStatus.NOTHING) {
                 System.out.println("***************");
@@ -167,6 +167,8 @@ public abstract class AlternateTurnGame extends GameImpl {
 
     @Override
     public void endOfRound() {
+        // a la fin d'une manche cad lorsqu'un joueur déclare Yaniv, on compte les
+        // points de chaque joueur et on vérifie si l'un des joueurs peut déclarer Assaf
         System.out.println("\nLa manche " + numRound + " est terminée.");
         System.out.println("Décompte des points:");
         for (Player player : players) {
@@ -174,12 +176,16 @@ public abstract class AlternateTurnGame extends GameImpl {
             if (player != currentPlayer) {
                 player.addPoints(player.getHand());
                 System.out.println("Joueur " + player.getNumero() + " : " + player.getPoints());
-                boolean assaf=false;
-                if (player.hasAssafDeclaration(currentPlayer)&&!assaf) {// on ne peut déclarer assaf q'une seule fois a la fin d'une manche
-                    System.out.println("Le joueur " + player.getNumero() + " déclare 'Assaf' puisqu'il a "+player.sumPointsHand()+" points dans ses mains contre "+currentPlayer.sumPointsHand()+" points dans celles de celui du joueur "+currentPlayer.getNumero()+". Le joueur " + currentPlayer.getNumero()
-                    + " est pénalisé et récupère 30 points.");
+                boolean assaf = false;
+                if (player.hasAssafDeclaration(currentPlayer) && !assaf) {// on ne peut déclarer assaf q'une seule fois
+                                                                          // a la fin d'une manche
+                    System.out.println("Le joueur " + player.getNumero() + " déclare 'Assaf' puisqu'il a "
+                            + player.sumPointsHand() + " points dans ses mains contre " + currentPlayer.sumPointsHand()
+                            + " points dans celles de celui du joueur " + currentPlayer.getNumero() + ". Le joueur "
+                            + currentPlayer.getNumero()
+                            + " est pénalisé et récupère 30 points.");
                     currentPlayer.addPoints(30);
-                    assaf=true;
+                    assaf = true;
                 }
             }
         }
@@ -190,7 +196,7 @@ public abstract class AlternateTurnGame extends GameImpl {
     @Override
     public void endOfGame() {
         if (this.nbPlayers == 1) {
-            System.out.println("Le joueur " + currentPlayer.getNumero() + " remporte la  partie!");
+            System.out.println("Le joueur " + players.get(0).getNumero() + " remporte la  partie!");
             hasNextRound = false;
         }
     }
@@ -201,13 +207,16 @@ public abstract class AlternateTurnGame extends GameImpl {
             Player player = playersIterator.next();
             if (player.isLoser()) {
                 System.out.println("Le joueur " + player.getNumero() + " a perdu et est éliminé.");
-                playersIterator.remove(); // Utilisation de l'itérateur pour supprimer en toute sécurité
+                playersIterator.remove();
                 nbPlayers--;
             }
         }
     }
 
     public void remakeDeckPile() {
+        // On refait une pile de pioche a partir de la pile de défausse: toutes les
+        // cartes de la pile de défausse, sauf la derniere carte qui a été mise, sont
+        // melangées et forme la pile de pioche
         Card discardCard = discardPile.takeFist();
         deckPile.addAll(discardPile.getPile());
         deckPile.randomDeck();

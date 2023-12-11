@@ -17,9 +17,9 @@ public class SmartPlayer extends DumbPlayer {
     @Override
     public List<Card> chooseDiscardCards() { // choisi les cartes a defausser, les retire de sa main et renvoie la liste
                                              // des cartes a défausser
-        List<Card> newHand = new ArrayList<>(hand.subList(0, hand.size() - 1)); // le joueru ne peut pas défausser la
-                                             // carte qu'il a prise ( soit de la
-                                             // pioche soit de la pile de défausse)        
+        List<Card> newHand = new ArrayList<>(hand.subList(0, hand.size() - 1)); // le joueur ne peut pas défausser la
+        // carte qu'il a prise (soit de la
+        // pioche soit de la pile de défausse)
         discardedCards.reset();
         discardedCards = DiscardedCards.EMPTY;
         List<Card> discardedCardsLocal = new ArrayList<>();
@@ -57,32 +57,34 @@ public class SmartPlayer extends DumbPlayer {
 
     @Override
     public boolean chooseDeck(DiscardPile discardPile) {
-        if(!discardPile.isEmpty()){
+        if (!discardPile.isEmpty()) {
             return !hand.stream()
-                .anyMatch(e -> e.getCardValue().getRank() == discardPile.getFirst().getCardValue().getRank());
-            // true si le numero de la premiere carte de la pile de defausse n'est pas egale a l'un des
-            // numero des cartes de la main du joueur
-        }
-        else return true;
+                    .anyMatch(e -> e.getCardValue().getRank() == discardPile.getFirst().getCardValue().getRank());
+            // false si le numero de la premiere carte de la pile de defausse est egal a
+            // l'un des
+            // numero des cartes de la main du joueur sinon true
+        } else
+            return true;
     }
 
     @Override
-    public boolean choosePick(Card card){
-        //en ajoutant cette carte a la main du joueur, on vérifie si le joueur peut former une suite avec cette carte. Si oui, il choisit de prendre la carte
-        boolean pick=false;
+    public boolean choosePick(Card card) {
+        // en ajoutant cette carte a la main du joueur, on vérifie si le joueur peut
+        // former une suite avec cette carte. Si oui, il choisit de prendre la carte
+        // doncc renvoie true
+        boolean pick = false;
         List<Card> hand = new LinkedList<Card>();
         DiscardedCards discardedCards = DiscardedCards.SEQUENCE;
-        List <Card> newHand=new ArrayList<>(hand);
+        List<Card> newHand = new ArrayList<>(hand);
         newHand.add(card);
-        if(discardedCards.hasSequence(newHand)){
-            if(discardedCards.getList().contains(card)&&discardedCards.getList().size()==3){
-                pick= true;
+        if (discardedCards.hasSequence(newHand)) {
+            if (discardedCards.getList().contains(card) && discardedCards.getList().size() == 3) {
+                pick = true;
             }
         }
         discardedCards.reset();
-        discardedCards=DiscardedCards.EMPTY;
+        discardedCards = DiscardedCards.EMPTY;
         return pick;
     }
-    
 
 }

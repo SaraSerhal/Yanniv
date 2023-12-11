@@ -28,8 +28,7 @@ public class DumbPlayer extends Player {
         }
         takeOneCard(discardPile, deckPile, canChooseOnlyDeck);
         discardCards(discardPile);
-        winPower();
-        // On voit le power qu'il a appliqué
+        winPower(); // On voit le power qu'il a appliqué
     }
 
     public void takeOneCard(DiscardPile discardPile, DeckPile deckPile, boolean canChooseOnlyDeck) {
@@ -90,9 +89,9 @@ public class DumbPlayer extends Player {
     }
 
     @Override
-    public List<Card> chooseDiscardCards() {
-        List<Card> newHand = new ArrayList<>(hand.subList(0, hand.size() - 1)); // le joueru ne peut pas défausser la
-                                                                                // carte qu'il a prise ( soit de la
+    public List<Card> chooseDiscardCards() {//  choisi une carte aléatoire à défausser
+        List<Card> newHand = new ArrayList<>(hand.subList(0, hand.size() - 1)); // le joueur ne peut pas défausser la
+                                                                                // carte qu'il a prise (soit de la
                                                                                 // pioche soit de la pile de défausse)
         discardedCards.reset();
         discardedCards = DiscardedCards.EMPTY;

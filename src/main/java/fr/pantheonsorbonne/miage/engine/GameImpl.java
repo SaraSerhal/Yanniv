@@ -24,7 +24,7 @@ public abstract class GameImpl implements Game {
     public GameImpl() {
         players = new LinkedList<Player>();
         nbPlayers = random.nextInt(4) + 2; // Génère un nombre aléatoire entre 0 et 3, puis on ajoute 2 pour obtenir un
-                                           // nombre entre 2 et 5;
+                                                // nombre entre 2 et 5;
         gameStatus = GameStatus.ONGOING;
         numRound = 1;
         deckPile = new DeckPile();
@@ -61,7 +61,7 @@ public abstract class GameImpl implements Game {
         giveCardsToPlayer();
     }
 
-    public void initializePlayers() { // changer pour smartPlayer
+    public void initializePlayers() {
         for (int i = 0; i < nbPlayers; i++) {
             Player player = new SmartPlayer(i + 1);
             players.add(player);
