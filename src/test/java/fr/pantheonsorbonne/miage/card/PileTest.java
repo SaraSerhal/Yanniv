@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+
 import org.junit.jupiter.api.Test;
 
 import fr.pantheonsorbonne.miage.card.enums.CardColor;

@@ -32,7 +32,7 @@ public class DeckPile extends Pile {
             } else {
                 cards.add(pile.pop()); // retire et renvoie l'element au dessus de la pile
             }
-        } // renvoyer une exception si la pile est vide
+        }
         return cards; // pile de cartes de longueur nb.
     }
 }

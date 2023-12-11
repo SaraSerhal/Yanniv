@@ -7,7 +7,6 @@ import java.util.Random;
 import fr.pantheonsorbonne.miage.card.Card;
 import fr.pantheonsorbonne.miage.card.DeckPile;
 import fr.pantheonsorbonne.miage.card.DiscardPile;
-import fr.pantheonsorbonne.miage.player.DumbPlayer;
 import fr.pantheonsorbonne.miage.player.Player;
 import fr.pantheonsorbonne.miage.player.SmartPlayer;
 
