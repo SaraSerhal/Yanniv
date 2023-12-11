@@ -80,5 +80,6 @@ public class SmartPlayer extends DumbPlayer {
         discardedCards=DiscardedCards.EMPTY;
         return pick;
     }
+    
 
 }
