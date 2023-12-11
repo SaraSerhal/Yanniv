@@ -57,7 +57,8 @@ public class SmartPlayer extends DumbPlayer {
     @Override
     public boolean chooseDeck(DiscardPile discardPile) {
         if(!discardPile.isEmpty()){
-            return !anyCardHandRankEqualsTo(discardPile.getFirst());
+            return !hand.stream()
+                .anyMatch(e -> e.getCardValue().getRank() == discardPile.getFirst().getCardValue().getRank());
             // si le numero de la premiere carte de la pile de defausse n'est pas egale a l'un des
             // numero des cartes de la main du joueur
         }//sinon exception
@@ -66,12 +67,18 @@ public class SmartPlayer extends DumbPlayer {
 
     @Override
     public boolean choosePick(Card card){
-        return anyCardHandRankEqualsTo(card);
-    }
-
-    public boolean anyCardHandRankEqualsTo(Card card){
-        return hand.stream()
-                .anyMatch(e -> e.getCardValue().getRank() == card.getCardValue().getRank());
+        //en ajoutant cette carte a la main du joueur, on vérifie si le joueur peut former une suite avec cette carte. Si oui, il choisit de prendre la carte
+        boolean pick=false;
+        List <Card> newHand=new ArrayList<>(hand);
+        newHand.add(card);
+        if(discardedCards.hasSequence(newHand)){
+            if(discardedCards.getList().contains(card)&&discardedCards.getList().size()==3){
+                pick= true;
+            }
+        }
+        discardedCards.reset();
+        discardedCards=DiscardedCards.EMPTY;
+        return pick;
     }
 
 }
