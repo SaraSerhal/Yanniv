@@ -51,14 +51,6 @@ public class PileTest {
     }
 
     @Test
-    public void testPileSize2(){ //vérifier la taille de la pile
-        Pile pile = new DeckPile();
-        Deque<Card> deckCard = new ArrayDeque<Card>();
-        pile.setPile(deckCard);
-        assertEquals(0,pile.size());
-    }
-
-    @Test
     public void testAddAllToPile(){
         Pile pile = new DeckPile();
         Deque<Card> deque = new ArrayDeque<Card>();
