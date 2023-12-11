@@ -59,9 +59,9 @@ public class SmartPlayer extends DumbPlayer {
         if(!discardPile.isEmpty()){
             return !hand.stream()
                 .anyMatch(e -> e.getCardValue().getRank() == discardPile.getFirst().getCardValue().getRank());
-            // si le numero de la premiere carte de la pile de defausse n'est pas egale a l'un des
+            // true si le numero de la premiere carte de la pile de defausse n'est pas egale a l'un des
             // numero des cartes de la main du joueur
-        }//sinon exception
+        }
         else return true;
     }
 

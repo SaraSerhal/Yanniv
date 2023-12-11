@@ -58,7 +58,7 @@ public class Card {
      *
      * @param str
      * @return the card
-     * @throws RuntimeException if the String representation is Invaliid
+     * @throws RuntimeException if the String representation is Invalid
      */
     public static Card valueOf(String str) { // Convertit une représentation textuelle d'une carte en un objet Card. La
                                              // méthode prend en charge la représentation des cartes avec des valeurs à

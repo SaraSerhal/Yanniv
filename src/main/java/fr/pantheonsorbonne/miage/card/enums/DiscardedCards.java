@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import fr.pantheonsorbonne.miage.card.Card;
-import fr.pantheonsorbonne.miage.card.DeckPile;
-import fr.pantheonsorbonne.miage.card.DiscardPile;
 
 public enum DiscardedCards {
     EMPTY(null),
@@ -150,7 +148,7 @@ public enum DiscardedCards {
 
     public Card highestCard(List<Card> listCard) {
         if (listCard == null || listCard.isEmpty()) {
-            // renvoyer une exception
+            throw new IllegalArgumentException("La liste de cartes est vide ou nulle.");
         }
         Card c = listCard.get(0);
         for (Card card : listCard) {

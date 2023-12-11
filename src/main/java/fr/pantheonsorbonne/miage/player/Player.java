@@ -102,7 +102,7 @@ public abstract class Player {
                 sum += card.getCardValue().getValue();
             }
         }else{
-            //renvoyer exception
+            throw new IllegalArgumentException("La main du joueur est nulle ou vide.");
         }
         return sum;
     }
