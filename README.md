@@ -52,10 +52,3 @@ Combinaisons de Cartes
 Gestion des Cartes : Gérez soigneusement vos cartes pour minimiser les points à la fin de la manche.
 Observation : Observez les cartes jouées par les autres joueurs pour adapter votre stratégie.
 Déclaration Prudente : Soyez judicieux dans la déclaration de Yaniv, car une déclaration incorrecte entraîne des points supplémentaires.
-
-
-### Protocole réseau
-
-> Le protocole réseau définit les séquences des commandes échangées entre les différentes parties prenantes. Il doit contenir, pour chaque commande, l'expéditeur, le destinataire, le nom de la commande et le contenu du corps de la commande.
-
-![protocole](doc/protocle.png)
